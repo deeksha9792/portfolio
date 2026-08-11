@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deeksha — Backend Engineer & Product Builder</title>
+<meta name="description" content="Deeksha — Backend Engineer (NestJS) who ships end-to-end products: Flutter mobile apps and Google Apps Script web apps.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230f1720%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%232dd4bf%22 font-family=%22Arial%22 font-weight=%22bold%22>D</text></svg>">
+<style>
+  :root{
+    --bg:#0b0f14;
+    --bg-alt:#0f1520;
+    --card:#121a24;
+    --card-border:#1f2a38;
+    --text:#e8edf2;
+    --muted:#8a97a6;
+    --accent:#2dd4bf;
+    --accent-2:#7c9eff;
+    --radius:16px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(11,15,20,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--card-border);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    max-width:var(--maxw);margin:0 auto;padding:16px 24px;
+  }
+  .logo{font-weight:700;font-size:1.2rem;letter-spacing:0.5px;}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:28px;font-size:0.95rem;color:var(--muted);}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;}
+
+  /* HERO */
+  .hero{
+    padding:96px 0 64px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+    width:600px;height:600px;
+    background:radial-gradient(circle, rgba(45,212,191,0.18), transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-block;
+    color:var(--accent);
+    background:rgba(45,212,191,0.1);
+    border:1px solid rgba(45,212,191,0.3);
+    padding:6px 16px;
+    border-radius:999px;
+    font-size:0.85rem;
+    margin-bottom:20px;
+    letter-spacing:0.3px;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.4rem);
+    margin:0 0 14px;
+    font-weight:800;
+    letter-spacing:-0.5px;
+  }
+  .hero h1 .hi{color:var(--muted);font-weight:500;font-size:0.5em;display:block;margin-bottom:8px;}
+  .hero p.lead{
+    max-width:620px;margin:0 auto 32px;
+    color:var(--muted);
+    font-size:1.1rem;
+  }
+  .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 28px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:0.95rem;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    border:1px solid var(--card-border);
+  }
+  .btn-primary{background:var(--accent);color:#04211c;border-color:var(--accent);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,212,191,0.25);}
+  .btn-ghost{background:transparent;color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+
+  /* STATS */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin-top:56px;
+  }
+  .stat{
+    background:var(--card);border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 16px;text-align:center;
+  }
+  .stat .num{font-size:1.7rem;font-weight:800;color:var(--accent);}
+  .stat .lbl{color:var(--muted);font-size:0.82rem;margin-top:4px;}
+
+  /* SECTION shared */
+  section{padding:80px 0;}
+  .section-head{margin-bottom:44px;text-align:center;}
+  .section-head .tag{color:var(--accent);font-size:0.85rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+  .section-head h2{font-size:2rem;margin:8px 0 0;font-weight:800;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start;}
+  .about-grid p{color:var(--muted);margin:0 0 16px;font-size:1.02rem;}
+  .skill-block{margin-bottom:22px;}
+  .skill-block h4{margin:0 0 10px;font-size:0.95rem;color:var(--text);}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag-pill{
+    background:var(--card);border:1px solid var(--card-border);
+    color:var(--text);
+    padding:6px 14px;border-radius:999px;font-size:0.85rem;
+  }
+  .tag-pill.accent{border-color:rgba(45,212,191,0.4);color:var(--accent);}
+
+  /* PROJECTS */
+  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.35);border-color:rgba(45,212,191,0.35);}
+  .card-img{aspect-ratio:16/9;overflow:hidden;background:#0d1117;}
+  .card-img img{width:100%;height:100%;object-fit:cover;object-position:top;}
+  .card-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .card-top h3{margin:0;font-size:1.25rem;}
+  .rating{font-size:0.82rem;color:var(--muted);white-space:nowrap;}
+  .card-body p{color:var(--muted);margin:0;font-size:0.94rem;}
+  .card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+  .card-tags span{
+    font-size:0.75rem;color:var(--accent-2);
+    background:rgba(124,158,255,0.1);
+    border:1px solid rgba(124,158,255,0.25);
+    padding:4px 10px;border-radius:999px;
+  }
+  .card-link{
+    margin-top:10px;
+    display:inline-flex;align-items:center;gap:6px;
+    color:var(--accent);font-weight:600;font-size:0.9rem;
+  }
+  .card-link:hover{text-decoration:underline;}
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--card);border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:56px 40px;text-align:center;
+  }
+  .contact-box h2{margin:0 0 12px;font-size:1.9rem;font-weight:800;}
+  .contact-box p{color:var(--muted);margin:0 0 28px;}
+  .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  footer{
+    text-align:center;padding:32px 0;color:var(--muted);font-size:0.85rem;
+    border-top:1px solid var(--card-border);
+  }
+
+  @media (max-width: 860px){
+    .nav-links{display:none;}
+    .about-grid{grid-template-columns:1fr;gap:32px;}
+    .projects-grid{grid-template-columns:1fr;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">DEEKSHA<span>.</span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-ghost" style="padding:8px 18px;font-size:0.85rem;">Get in touch</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Backend Engineer · Product Builder</span>
+    <h1><span class="hi">Hi, I'm</span>Deeksha</h1>
+    <p class="lead">
+      I build backend systems with <strong>NestJS</strong> — and outside of work, I design and
+      ship complete products end-to-end: three Flutter apps live on the Play Store and a
+      web app built on Google Apps Script, all used by real people every day.
+    </p>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">4</div><div class="lbl">Products Shipped</div></div>
+      <div class="stat"><div class="num">5K+</div><div class="lbl">App Downloads</div></div>
+      <div class="stat"><div class="num">2.3K+</div><div class="lbl">Monthly Active Users</div></div>
+      <div class="stat"><div class="num">4.5★</div><div class="lbl">Play Store Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">About</div>
+      <h2>My Journey</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>
+          I started my career as a <strong>backend engineer</strong>, building APIs and
+          services with <strong>NestJS</strong>. That's my day-to-day craft — clean
+          architecture, solid data models, and reliable services.
+        </p>
+        <p>
+          Alongside that, I taught myself <strong>Flutter</strong> to build and publish my
+          own mobile apps — from idea, to design, to the Play Store, to real users and real
+          analytics. I also built a full web application using <strong>Google Apps
+          Script</strong>, proving I can ship a working product on almost any stack when the
+          problem calls for it.
+        </p>
+        <p>
+          I care about building things end-to-end: the API, the app, the store listing, and
+          the person using it on the other end.
+        </p>
+      </div>
+      <div>
+        <div class="skill-block">
+          <h4>Backend</h4>
+          <div class="tags">
+            <span class="tag-pill accent">NestJS</span>
+            <span class="tag-pill accent">Node.js</span>
+            <span class="tag-pill accent">TypeScript</span>
+            <span class="tag-pill accent">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Mobile</h4>
+          <div class="tags">
+            <span class="tag-pill">Flutter</span>
+            <span class="tag-pill">Dart</span>
+            <span class="tag-pill">Android / Play Console</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Web &amp; Automation</h4>
+          <div class="tags">
+            <span class="tag-pill">Google Apps Script</span>
+            <span class="tag-pill">Firebase Hosting</span>
+            <span class="tag-pill">Webhooks &amp; Scheduling</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <h4>Tools</h4>
+          <div class="tags">
+            <span class="tag-pill">Git</span>
+            <span class="tag-pill">Play Console Analytics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">Projects</div>
+      <h2>Things I've Built &amp; Shipped</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="card">
+        <div class="card-img"><img src="assets/scrollfence-hero.jpg" alt="ScrollFence app preview"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>ScrollFence</h3>
+            <span class="rating">4.5★ · 5K+ downloads</span>
+          </div>
+          <p>A digital wellbeing app — "No Scroll, More Life." Set daily app limits, track
+            screen time in real-time, get smart nudges to take a break, and view detailed
+            usage insights. Includes parental controls.</p>
+          <div class="card-tags">
+            <span>Flutter</span><span>Android</span><span>Digital Wellbeing</span>
+          </div>
+          <a class="card-link" href="https://play.google.com/store/apps/details?id=com.midnfence.app" target="_blank" rel="noopener">View on Play Store →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="assets/destalarm-hero.jpg" alt="Destination Alarm app preview"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>Destination Alarm</h3>
+            <span class="rating">Location-based alerts</span>
+          </div>
+          <p>"Never miss your stop again." Pick any location on the map, set an alert
+            radius, and choose your snooze frequency — your phone rings loudly the moment
+            you're close, so you can relax on the ride.</p>
+          <div class="card-tags">
+            <span>Flutter</span><span>Geolocation</span><span>Android</span>
+          </div>
+          <a class="card-link" href="https://play.google.com/store/apps/details?id=com.destinationalarm.id" target="_blank" rel="noopener">View on Play Store →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="assets/anyshare-hero.jpg" alt="AnyShare app preview"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>AnyShare</h3>
+            <span class="rating">Cross-platform</span>
+          </div>
+          <p>"Share Anything. With Anyone. Anywhere." Effortless file sharing via link or QR
+            code — no app required for the receiver, no cloud storage, no sign up. Works
+            across Android, iOS, Windows, Mac and Linux.</p>
+          <div class="card-tags">
+            <span>Flutter</span><span>File Sharing</span><span>Cross-platform</span>
+          </div>
+          <a class="card-link" href="https://play.google.com/store/apps/details?id=com.anyshare.app" target="_blank" rel="noopener">View on Play Store →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="assets/triggerly-hero.jpg" alt="Triggerly web app preview"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>Triggerly</h3>
+            <span class="rating">Web App</span>
+          </div>
+          <p>A free API scheduler and cron alternative for HTTP requests and webhooks —
+            Postman-style payloads, Google Sign-In, and predictable no-fee scheduling, with
+            zero per-trigger billing surprises.</p>
+          <div class="card-tags">
+            <span>Google Apps Script</span><span>Firebase Hosting</span><span>Automation</span>
+          </div>
+          <a class="card-link" href="https://triggerly-a1.web.app/" target="_blank" rel="noopener">Open Web App →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>Let's build something together</h2>
+      <p>Open to backend engineering roles and interesting product collaborations.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:your.email@example.com">✉ Email Me</a>
+        <a class="btn btn-ghost" href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Deeksha. Built with plain HTML, CSS &amp; JS.
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
