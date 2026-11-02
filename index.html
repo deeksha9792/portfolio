@@ -148,6 +148,7 @@
   .card-img{aspect-ratio:16/9;overflow:hidden;background:#0d1117;}
   .card-img img{width:100%;height:100%;object-fit:cover;object-position:top;}
   .card-img.portrait img{object-fit:contain;object-position:center;}
+  .card-img.contain img{object-fit:contain;object-position:center;}
   .card-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1;}
   .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .card-top h3{margin:0;font-size:1.25rem;}
@@ -217,7 +218,7 @@
     <h1><span class="hi">Hi, I'm</span>Deeksha</h1>
     <p class="lead">
       I build backend systems with <strong>NestJS</strong> — and outside of work, I design and
-      ship complete products end-to-end: four Flutter apps live on the Play Store, one more
+      ship complete products end-to-end: four Flutter apps live on the Play Store, two more
       in review, and a web app built on Google Apps Script, all used by real people every day.
     </p>
     <div class="cta-row">
@@ -226,7 +227,7 @@
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="num">6</div><div class="lbl">Products Shipped</div></div>
+      <div class="stat"><div class="num">7</div><div class="lbl">Products Shipped</div></div>
       <div class="stat"><div class="num">20K+</div><div class="lbl">App Downloads</div></div>
       <div class="stat"><div class="num">4.7K+</div><div class="lbl">Monthly Active Users</div></div>
       <div class="stat"><div class="num">4.5★</div><div class="lbl">Play Store Rating</div></div>
@@ -375,17 +376,34 @@
       </div>
 
       <div class="card">
-        <div class="card-img portrait"><img src="assets/ringwise-hero.jpg" alt="RingWise app preview"></div>
+        <div class="card-img contain"><img src="assets/ringwise-hero.png" alt="RingWise app preview"></div>
         <div class="card-body">
           <div class="card-top">
             <h3>RingWise</h3>
             <span class="status-pill review">In Review</span>
           </div>
-          <p>"Your phone, on your terms." RingWise decides what happens to a call before it
-            ever reaches you — the people who matter ring through, spam is turned away, and
-            everyone else gets handled automatically.</p>
+          <p>"The right call, your way." Set smart rules for every number — by contact,
+            group, or number — to ring, silence, ignore, or auto-reply, so calls are handled
+            exactly how you want before they ever reach you.</p>
           <div class="card-tags">
             <span>Flutter</span><span>Android</span><span>Call Management</span>
+          </div>
+          <span class="card-link disabled">Submitted to Play Store — pending review</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img contain"><img src="assets/cineping-hero.png" alt="CinePing app preview"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>CinePing</h3>
+            <span class="status-pill review">In Review</span>
+          </div>
+          <p>"We watch the seats. You just show up." A movie booking watchdog — paste a
+            BookMyShow movie link, pick your date and cinema, and CinePing fires a loud
+            full-screen alarm the instant bookings open, even through silent mode or DND.</p>
+          <div class="card-tags">
+            <span>Flutter</span><span>Android</span><span>Background Monitoring</span>
           </div>
           <span class="card-link disabled">Submitted to Play Store — pending review</span>
         </div>
